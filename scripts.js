@@ -58,7 +58,7 @@ function operate(operator, a, b){
 }
 
 function appendInputValue(e) {
-  if(e.target.innerHTML === '.' && currentInput.includes(".")) return;
+  if((e.target.innerHTML === '.' && currentInput.includes(".")) || currentInput.length > 10) return;
   currentInput += e.target.innerHTML;
   mainDiv.innerHTML = currentInput;
   showItem(mainDiv);
@@ -114,12 +114,14 @@ function negate(e){
 function round(numStr){
   const maxLength = (numStr.includes(".") || numStr.includes('-')) ? 11 : 10;
   let solution = Number(numStr);
-  if (numStr.length > maxLength || numStr.includes('e+')){
+  if (numStr.includes('e+')){
     return "Result is too large";
   }else if (numStr.length > maxLength && numStr.includes('.')){
     let numOfDecimals = numStr.slice(numStr.indexOf('.')+1).length;
     let lengthDifference = numStr.length - maxLength;
     solution = parseFloat(solution.toFixed(numOfDecimals - lengthDifference));
+  }else if (numStr.length > maxLength){
+    return "Result is too large";
   }else if(numStr === "Infinity"){
     return "Please no!";
   }

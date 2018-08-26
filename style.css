@@ -76,6 +76,7 @@ button:hover {
 #main {
   font-size: 2.5em;
   padding-top: 30px;
+  line-height: 45px;
 }
 
 .hidden {
